@@ -4,5 +4,5 @@ Nesse programa estamos utilizando Python e MySql, e para criação das interface
 
 Backend: Alisson Amorin, Douglas Cordeiro
 Frontend: Alisson Amorin, Renê Farias
-Documentação e testes: Marilio Azevedo, Wellington Nunes
+Documentação e testes: Marcilio Azevedo, Wellington Nunes
 Banco de dados: Douglas Cordeiro
