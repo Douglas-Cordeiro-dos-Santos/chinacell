@@ -7,16 +7,9 @@ from estoque import Ui_Estoque
 from verprod import Ui_Ver_produto
 from cadastropdt import Ui_Cadastro_pdt
 
-import sys
-import mysql.connector
+import sql_connection as sc
 
-# CONEXÃO SQL
-conexao = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="1234",
-    database="chinacell"
-)
+import sys
 
 # TELA DE LOGIN
 class Log(QMainWindow, Ui_Login):
@@ -43,7 +36,7 @@ class Log(QMainWindow, Ui_Login):
         login = self.lineEdit_usuario.text()
         senha = self.lineEdit_2_senha.text()
 
-        cursor = conexao.cursor()
+        cursor = sc.conexao.cursor()
         cursor.clear_attributes()       
         
         comando = 'SELECT senha FROM usuarios WHERE nome = %s'
@@ -93,7 +86,7 @@ class MainWindow(QMainWindow, Ui_Estoque):
         if self.Button_pesquisa.clicked:
             produto = self.lineEdit_pesquisa.text()
 
-            cursor = conexao.cursor()
+            cursor = sc.conexao.cursor()
             cursor.clear_attributes()   
             comando = 'SELECT * FROM estoque WHERE produto LIKE %s;'
             cursor.execute(comando, (produto,))
@@ -116,7 +109,7 @@ class MainWindow(QMainWindow, Ui_Estoque):
             self.close()    
 
     def puxar_tabela(self):
-        cursor = conexao.cursor()
+        cursor = sc.conexao.cursor()
         comando = 'SELECT * FROM estoque'
         cursor.execute(comando)
         leitura_banco = cursor.fetchall()
@@ -141,7 +134,7 @@ class RedfMainWindow(QMainWindow, Ui_Redefinir):
         senha_1 = self.lineEdit_2_1senha.text()
         senha_2 = self.lineEdit_3_2senha.text()
 
-        cursor = conexao.cursor()
+        cursor = sc.conexao.cursor()
         cursor.clear_attributes()       
         
         comando = 'SELECT nome FROM usuarios WHERE nome = %s'
@@ -154,7 +147,7 @@ class RedfMainWindow(QMainWindow, Ui_Redefinir):
 
             comando = 'UPDATE usuarios SET SENHA = %s WHERE nome = %s'
             cursor.execute(comando, dados)
-            conexao.commit()  
+            sc.conexao.commit()  
 
             QMessageBox.warning(self, "Sucesso!", "Senha alterada.")
             self.voltar_Login()
@@ -196,7 +189,7 @@ class VerpdtMainWindow(QMainWindow, Ui_Ver_produto):
             self.close()
 
     def carregar_dados(self, produto_id):
-        cursor = conexao.cursor()
+        cursor = sc.conexao.cursor()
         comando = 'SELECT * FROM estoque WHERE id = %s'
         cursor.execute(comando, (produto_id,))
         produto = cursor.fetchone()
@@ -229,11 +222,11 @@ class CadastroMainWindow(QMainWindow, Ui_Cadastro_pdt):
         preco_unit = self.lineEdit_7_preco_uni.text()
         categoria = self.lineEdit_8_categoria.text()
 
-        cursor = conexao.cursor()
+        cursor = sc.conexao.cursor()
         inserir_dados = "INSERT INTO ESTOQUE (PRODUTO, QUANTIDADE, COD_BARRAS, PRECO_UNIT, CATEGORIA) VALUES (%s, %s, %s, %s, %s)"
         dados = (str(produto), str(quantidade), str(cod_barras),  str(preco_unit), str(categoria))
         cursor.execute(inserir_dados, dados)
-        conexao.commit()
+        sc.conexao.commit()
 
         self.lineEdit_produto.clear()
         self.lineEdit_5_qtde.clear()

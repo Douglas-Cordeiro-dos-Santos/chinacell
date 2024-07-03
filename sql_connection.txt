@@ -1,0 +1,11 @@
+Antes de executar o arquivo sql_connection.py, altere os dados da variável conexao, com as informações do seu sql.
+
+Por padrão está da seguinte forma:
+
+host="localhost"
+user="root"
+password="1234"
+database="chinacell"
+
+Altere os dados mantendo entre aspas para não houver problema, após a alteração, salve o arquivo e pode executar o programa.
+Por padrão o usuário criado irá ficar com login admin, e senha admin.

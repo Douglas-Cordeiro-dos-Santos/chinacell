@@ -1,0 +1,10 @@
+Antes de executar o arquivo banco_dados.py, altere os dados da variável config, com as informações do seu sql.
+
+Por padrão está da seguinte forma:
+
+'user': 'root'
+'password': '1234'
+'host': '127.0.0.1'
+
+Altere os dados mantendo entre aspas para não houver problema, após a alteração, execute o arquivo para a criação do banco de dados.
+Por padrão o usuário criado irá ficar com login admin, e senha admin.
